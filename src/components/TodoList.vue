@@ -1,8 +1,8 @@
 <template>
   <div class="listContainer">
-    <div class="listItem" v-for="(todos, index) in todoList" :key="index">
+    <div  v-for="(todos, index) in todoList" :key="index" :class="{listItemDone : todos.isDone, listItem: !todos.isDone }">
       <div>
-        <input type="checkbox" v-model="todos.isDone" />
+        <input class="checkbox" type="checkbox" v-model="todos.isDone" />
         <span>{{todos.todo}}</span>
       </div>
       <span class="deleteBtn"> &times; <span>
@@ -44,7 +44,21 @@
     width: 100%;
     max-width: 300px;
     padding: 10px;
-    background-color: #efefef;
+    background-color: #db3236;
+    color: #f2f2f2;
+    margin-top: 10px;
+    border-radius: 5px
+  }
+
+  .listItemDone {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px;
+    padding: 10px;
+    background-color: #3cba54;
+    color: #f2f2f2;
     margin-top: 10px;
     border-radius: 5px
   }
