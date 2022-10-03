@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 form {
   display: flex;
   flex-direction: column;
@@ -47,8 +47,6 @@ label {
   color: #f2f2f2;
   cursor: pointer;
   margin-bottom: 10px;
-  max-width: 300px;
-  width: 100%;
   border-radius: 5px;
 }
 

@@ -2,18 +2,21 @@
   <div id="app">
     <Header />
     <Form />
+    <TodoList />
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
 import Form from './components/Form.vue';
+import TodoList from './components/TodoList.vue';
 
 export default {
   name: 'App',
   components: {
     Header,
     Form,
+    TodoList,
   },
 };
 </script>
