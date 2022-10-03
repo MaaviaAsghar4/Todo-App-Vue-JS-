@@ -1,14 +1,28 @@
 <template>
   <form>
     <label>Enter Todo</label>
-    <input id="type-text" type="text" placeholder="Add Task" />
+    <input
+      v-model="newTodo"
+      id="type-text"
+      type="text"
+      placeholder="Add Task"
+    />
     <input id="type-submit" type="submit" />
   </form>
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
   name: 'Form',
+  setup() {
+    const newTodo = ref('');
+
+    return {
+      newTodo,
+    };
+  },
 };
 </script>
 
