@@ -5,26 +5,32 @@
         <input class="checkbox" type="checkbox" v-model="todos.isDone" />
         <span>{{todos.todo}}</span>
       </div>
-      <span class="deleteBtn"> &times; <span>
+      <span @click="deleteTodos(todos.id)" class="deleteBtn"> &times; <span>
     <div>
   <div>
 </template>
 
 <script>
-  // import { ref } from "vue"
+  import { ref } from "vue";
 
   export default {
     name: 'TodoList',
     setup () {
-      const todoList = [
+      let todoList = ref([
         {id: 1, todo: 'Todo 1', isDone: false},
         {id: 2, todo: 'Todo 2', isDone: true},
         {id: 3, todo: 'Todo 3', isDone: false},
         {id: 4, todo: 'Todo 4', isDone: false},
-      ];
+      ]);
+
+      const deleteTodos = (id) => {
+        let filteredLists = todoList.value.filter(val => val.id !== id);
+        todoList.value = filteredLists
+      }
 
       return {
-        todoList
+        todoList,
+        deleteTodos
       }
     }
   }
