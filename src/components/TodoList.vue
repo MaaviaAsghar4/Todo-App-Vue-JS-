@@ -1,6 +1,7 @@
 <template>
   <div class="listContainer">
-    <div  v-for="(todos, index) in todoList" :key="index" :class="{listItemDone : todos.isDone, listItem: !todos.isDone }">
+    <p v-if="!newList.length">No more todos now...</p>
+    <div  v-for="(todos, index) in newList" :key="index" :class="{listItemDone : todos.isDone, listItem: !todos.isDone }">
       <div>
         <input class="checkbox" type="checkbox" v-model="todos.isDone" />
         <span>{{todos.todo}}</span>
@@ -16,26 +17,21 @@
   export default {
     name: 'TodoList',
     props: {
-      newTodo: String
+      todoList: Array
     },
     setup (props) {
-      console.log(props)
-      let todoList = ref([
-        {id: 1, todo: 'Todo 1', isDone: false},
-        {id: 2, todo: 'Todo 2', isDone: true},
-        {id: 3, todo: 'Todo 3', isDone: false},
-        {id: 4, todo: 'Todo 4', isDone: false},
-      ]);
+
+      let newList = ref(props.todoList)
 
       const deleteTodos = (id) => {
-        let filteredLists = todoList.value.filter(val => val.id !== id);
-        todoList.value = filteredLists
+        let filteredLists = newList.value.filter(val => val.id !== id);
+        newList.value = filteredLists
       }
 
       
 
       return {
-        todoList,
+        newList,
         deleteTodos
       }
     }
