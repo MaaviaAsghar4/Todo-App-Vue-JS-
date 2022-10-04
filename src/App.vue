@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <Form @todo-added="addTodo($event)" />
-    <TodoList :todo-list="todoList" />
+    <TodoList :todo-list="todoList" @delete-todo="deleteTodo($event)" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@
 import Header from './components/Header.vue';
 import Form from './components/Form.vue';
 import TodoList from './components/TodoList.vue';
-import { ref } from 'vue';
+import { ref, reactive, watch } from 'vue';
 
 export default {
   name: 'App',
@@ -20,21 +20,28 @@ export default {
     TodoList,
   },
   setup() {
-    let newTodo = ref('');
-    let todoList = ref([]);
+    let todoList = reactive([]);
 
     const addTodo = (event) => {
-      todoList.value.push({
+      todoList.push({
         isDone: false,
         todo: event.value,
         id: Math.random(),
       });
     };
 
+    const deleteTodo = (event) => {
+      todoList.splice(event, 1);
+    };
+
+    watch(todoList, (newVal) => {
+      console.log(newVal, '====>>>>>');
+    });
+
     return {
       addTodo,
-      newTodo,
       todoList,
+      deleteTodo,
     };
   },
 };

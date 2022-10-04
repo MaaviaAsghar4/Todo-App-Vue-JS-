@@ -6,7 +6,7 @@
         <input class="checkbox" type="checkbox" v-model="todos.isDone" />
         <span>{{todos.todo}}</span>
       </div>
-      <span @click="deleteTodos(todos.id)" class="deleteBtn"> &times; <span>
+      <span @click="deleteTodos(index)" class="deleteBtn"> &times; <span>
     <div>
   <div>
 </template>
@@ -16,19 +16,17 @@
 
   export default {
     name: 'TodoList',
+    emits: ['deleteTodo'],
     props: {
       todoList: Array
     },
-    setup (props) {
+    setup (props, { emit }) {
 
       let newList = ref(props.todoList)
 
       const deleteTodos = (id) => {
-        let filteredLists = newList.value.filter(val => val.id !== id);
-        newList.value = filteredLists
+        emit('deleteTodo', id)
       }
-
-      
 
       return {
         newList,
