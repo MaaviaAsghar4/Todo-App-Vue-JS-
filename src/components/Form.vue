@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent="addTodo()">
     <label>Enter Todo</label>
     <input
       v-model="newTodo"
@@ -16,11 +16,18 @@ import { ref } from 'vue';
 
 export default {
   name: 'Form',
-  setup() {
-    const newTodo = ref('');
+  emits: ['todoAdded'],
+  setup(props, { emit }) {
+    let newTodo = ref('');
+
+    const addTodo = () => {
+      emit('todoAdded', newTodo);
+      newTodo.value = '';
+    };
 
     return {
       newTodo,
+      addTodo,
     };
   },
 };

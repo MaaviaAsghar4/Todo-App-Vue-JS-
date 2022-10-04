@@ -11,11 +11,15 @@
 </template>
 
 <script>
-  import { ref } from "vue";
+  import { ref, watch } from "vue";
 
   export default {
     name: 'TodoList',
-    setup () {
+    props: {
+      newTodo: String
+    },
+    setup (props) {
+      console.log(props)
       let todoList = ref([
         {id: 1, todo: 'Todo 1', isDone: false},
         {id: 2, todo: 'Todo 2', isDone: true},
@@ -27,6 +31,8 @@
         let filteredLists = todoList.value.filter(val => val.id !== id);
         todoList.value = filteredLists
       }
+
+      
 
       return {
         todoList,

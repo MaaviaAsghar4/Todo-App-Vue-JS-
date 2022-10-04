@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Header />
-    <Form />
-    <TodoList />
+    <Form @todo-added="addTodo($event)" />
+    <TodoList :new-todo="newTodo" />
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 import Header from './components/Header.vue';
 import Form from './components/Form.vue';
 import TodoList from './components/TodoList.vue';
+import { ref, watch } from 'vue';
 
 export default {
   name: 'App',
@@ -17,6 +18,23 @@ export default {
     Header,
     Form,
     TodoList,
+  },
+  setup() {
+    let newTodo = ref('');
+
+    const addTodo = (event) => {
+      newTodo.value = event.value;
+    };
+
+    // watch(newTodo, (newVal) => {
+    //   console.log(newVal, '====>>>>');
+    //   newTodo.value = newVal;
+    // });
+
+    return {
+      addTodo,
+      newTodo,
+    };
   },
 };
 </script>
